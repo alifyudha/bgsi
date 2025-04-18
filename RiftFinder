@@ -41,6 +41,16 @@ function teleport()
     end
 end
 
+local eggs = {
+	"man-egg",
+	-- "rainbow-egg",
+	-- "void-egg",
+	"nightmare-egg",
+	"event-1",
+	"event-2",
+	"event-3"
+}
+
 notify("Finding eggs...", " ")
 
 for i,v in workspace.Rendered.Rifts:GetChildren() do
