@@ -7,6 +7,7 @@ if game.Players.LocalPlayer.PlayerGui.ScreenGui.Enabled == false then
 	game.Players.LocalPlayer.PlayerGui.Intro.Enabled = false
 	game.Players.LocalPlayer.PlayerGui.LoadingGui.Enabled = false
 	game.Players.LocalPlayer.PlayerGui.ScreenGui.Enabled = true
+	game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
 end
 local found = false
 
