@@ -78,6 +78,8 @@ for i,v in workspace.Rendered.Rifts:GetChildren() do
 	end
 end
 
+task.wait(5)
+
 if not found then
 	notify("Eggs Undetected", "Might take a while to server hop")
 	repeat
