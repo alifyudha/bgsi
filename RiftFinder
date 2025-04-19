@@ -45,6 +45,10 @@ function teleport()
     end
 end
 
+function sendWebhookNotif(rift)
+local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = rift.Name.." has been detected!", ["type"] = "rich", ["color"] = tonumber(0xffffff) }} }) } )
+end)
+
 local eggs = {
 	"man-egg",
 	-- "rainbow-egg",
@@ -61,6 +65,7 @@ for i,v in workspace.Rendered.Rifts:GetChildren() do
 	if table.find(eggs, v.Name) then
 		if v.Name == "man-egg" then
 			notify("Egg Detected!", "Egg: Aura")
+			sendWebhookNotif("Aura Egg")
 			local Highlight = Instance.new("Highlight")
 			Highlight.FillTransparency = 1
 			Highlight.Parent = v
@@ -70,6 +75,7 @@ for i,v in workspace.Rendered.Rifts:GetChildren() do
 			firetouchinterest(workspace.Rendered.Generic.Zen.Display, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
 		elseif v.Display.SurfaceGui.Icon.Luck.Text == "x25" then
 			notify("Egg Detected!", "Egg:" ..v.Name)
+			sendWebhookNotif(v.Name)
 
 			local Highlight = Instance.new("Highlight")
 			Highlight.FillTransparency = 1
