@@ -47,7 +47,7 @@ function teleport()
 end
 
 function sendWebhookNotif(rift)
-local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = rift.Name.." has been detected!", ["type"] = "rich", ["color"] = tonumber(0xffffff) }} }) } )
+local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = rift.." has been detected!", ["type"] = "rich", ["color"] = tonumber(0xffffff) }} }) } )
 end)
 
 local eggs = {
