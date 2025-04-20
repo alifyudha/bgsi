@@ -1,3 +1,5 @@
+-- loadstring(game:HttpGet('https://raw.githubusercontent.com/bingusUTMA/bgsi/refs/heads/main/RiftFinder'))()
+
 local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
 Webhook_URL = 'https://discord.com/api/webhooks/1363088891145490594/SxMa-lHRfVMvPoxI82NfsdI0UiiNbR7IoWQNA4l0VRO5VqRtLCg5RjAbvXqC8PaGZjhp'
@@ -57,6 +59,33 @@ function sendWebhookNotif(rift)
 local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = rift.." has been detected!", ["type"] = "rich", ["color"] = tonumber(0xffffff) }} }) } )
 end
 
+function SpoofEgg(rift)
+    if rift.Name == "nightmare-egg" then
+        return "Nightmare Egg"
+    elseif rift.name == "easter-1" then
+        return "Rabbit Egg"
+    elseif rift.name == "easter-2" then
+        return "Pastel Egg"
+    elseif rift.name == "rainbow-egg" then
+        return "Rainbow Egg"
+    elseif rift.Name == "man-egg" then
+        return "Aura Egg"
+    elseif rift.name == "void-egg" then
+        return "Void Egg"
+    end
+end
+
+function OpenEgg(rift)
+local egg = SpoofEgg(rift)
+
+local args = {
+    [1] = "HatchEgg",
+    [2] = egg,
+    [3] = 6
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event"):FireServer(unpack(args))
+end
+
 local eggs = {
 	"man-egg",
 	-- "rainbow-egg",
@@ -69,29 +98,28 @@ local eggs = {
 
 notify("Finding eggs...", " ")
 
-for i,v in workspace.Rendered.Rifts:GetChildren() do
-	if table.find(eggs, v.Name) then
-		if v.Name == "man-egg" then
-			notify("Egg Detected!", "Egg: Aura")
-			sendWebhookNotif("Aura Egg")
+for i,Rift in workspace.Rendered.Rifts:GetChildren() do
+	if table.find(eggs, Rift.Name) then   
+		if (Rift.Display.SurfaceGui.Icon.Luck.Text == "x25") or Rift.Name == "man-egg" then
+			notify("Egg Detected!", "Egg:" ..Rift.Name)
+			sendWebhookNotif(Rift.Name)
+
 			local Highlight = Instance.new("Highlight")
 			Highlight.FillTransparency = 1
-			Highlight.Parent = v
+			Highlight.Parent = Rift
 
 			found = true
 
 			firetouchinterest(workspace.Rendered.Generic.Zen.Display, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
-		elseif v.Display.SurfaceGui.Icon.Luck.Text == "x25" then
-			notify("Egg Detected!", "Egg:" ..v.Name)
-			sendWebhookNotif(v.Name)
 
-			local Highlight = Instance.new("Highlight")
-			Highlight.FillTransparency = 1
-			Highlight.Parent = v
-
-			found = true
-
-			firetouchinterest(workspace.Rendered.Generic.Zen.Display, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
+            repeat
+				local part1 = Rift.EggPlatformSpawn.Part
+				local part2 = game.Players.Character.HumanoidRootPart
+				if (part1.Position - part2.Position).Magnitude <= 10 then
+                	OpenEgg(Rift.Name)
+				end
+				task.wait(.1)
+            until not workspace.RenderedRifts:FindFirstChild(Rift.Name)               
 		end
 	end
 end
@@ -106,5 +134,5 @@ if not found then
 			print("hi")
 			task.wait(2)
 		end)
-	until found == true
+	until found = true
 end
