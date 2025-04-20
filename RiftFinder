@@ -24,10 +24,17 @@ end
 
 function teleport()
 	httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+	local sort
+	local rng = math.random(1,2)
+	if rng == 1 then
+	     sort = "Asc"
+	else
+	     sort = "Desc"
+	end
 
 	if httprequest then
         local servers = {}
-        local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", game.PlaceId)})
+        local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=" ..sort.. "&limit=100&excludeFullGames=true", game.PlaceId)})
         local body = HttpService:JSONDecode(req.Body)
 
         if body and body.data then
