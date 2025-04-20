@@ -55,8 +55,8 @@ function teleport()
     end
 end
 
-function sendWebhookNotif(title, description)
-local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = title, ["description"] = description, ["type"] = "rich", ["color"] = tonumber(0xffffff) }} }) } )
+function sendWebhookNotif(title, description, color)
+local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = title, ["description"] = description, ["type"] = "rich", ["color"] = tonumber(color) }} }) } )
 end
 
 function spoofEgg(rift)
@@ -110,7 +110,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 		if (Rift.Display.SurfaceGui.Icon.Luck.Text == "x25") or Rift.Name == "man-egg" then
 			local foundEgg = spoofEgg(Rift.Name)
 			notify("A rift has been found!", "Found rift:" ..foundEgg)
-			sendWebhookNotif("A rift has been found!", "Found rift: " ..foundEgg)
+			sendWebhookNotif("A rift has been found!", "Found rift: " ..foundEgg, 0x008000)
 
 			local Highlight = Instance.new("Highlight")
 			Highlight.FillTransparency = 1
@@ -124,7 +124,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 		if not Rift then RiftExists = false end
 		task.wait(.05)
             until RiftExists == false	
-	    sendWebhookNotif("Rift Disappeared", "The found rift, " ..foundEgg.. ", has just disappeared. If you would like to server hop, press X on your keyboard while ingame.")
+	    sendWebhookNotif("Rift Disappeared", "The found rift, " ..foundEgg.. ", has just disappeared. If you would like to server hop, press X on your keyboard while ingame.", 0xff0000)
 		end
 	end
 end
