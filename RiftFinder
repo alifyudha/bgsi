@@ -1,6 +1,5 @@
 local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
-Webhook_URL = 'https://discord.com/api/webhooks/1363088891145490594/SxMa-lHRfVMvPoxI82NfsdI0UiiNbR7IoWQNA4l0VRO5VqRtLCg5RjAbvXqC8PaGZjhp'
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
@@ -83,16 +82,6 @@ local args = {
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event"):FireServer(unpack(args))
 end
-
-local eggs = {
-	"man-egg",
-	-- "rainbow-egg",
-	-- "void-egg",
-	"nightmare-egg",
-	"event-1",
-	"event-2",
-	"event-3"
-}
 
 notify("Finding eggs...", " ")
 
