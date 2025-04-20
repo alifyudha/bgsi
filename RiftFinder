@@ -105,7 +105,7 @@ end)
 
 --////////////////////////////////////////////////////////
 
-notify("Finding eggs...", " ")
+notify("Finding rifts...", " ")
 
 for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 	if table.find(eggs, Rift.Name) then   
@@ -122,17 +122,16 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 
             repeat
                 OpenEgg(Rift.Name)
-				task.wait(.1)
-            until not workspace.Rendered.Rifts:FindFirstChild(Rift.Name)
-			sendWebhookNotif("Rift Disappeared", "The found rift, " ..foundEgg.. ", has just disappeared. If you would like to server hop, press X on your keyboard while ingame.")
+		task.wait(05)
+            until not workspace.Rendered.Rifts:FindFirstChild(Rift.Name)	
+	    sendWebhookNotif("Rift Disappeared", "The found rift, " ..foundEgg.. ", has just disappeared. If you would like to server hop, press X on your keyboard while ingame.")
 		end
 	end
 end
 
-task.wait(5)
-
 if not found then
-	notify("Eggs Undetected", "Might take a while to server hop")
+	notify("No rifts found", "Server hopping might take some time")
+	task.wait(5)
 	repeat
 		local s,f = pcall(function()
 			teleport()
