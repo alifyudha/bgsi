@@ -107,7 +107,7 @@ notify("Finding rifts...", " ")
 
 for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 	if table.find(eggs, Rift.Name) then   
-		if (Rift.Display.SurfaceGui.Icon.Luck.Text == "x25") or Rift.Name == "man-egg" then
+		if (Rift.Display.SurfaceGui.Icon.Luck.Text == "x25") or (Rift.Name == "man-egg") then
 			local foundEgg = spoofEgg(Rift.Name)
 			notify("A rift has been found!", "Found rift:" ..foundEgg)
 			sendWebhookNotif("A rift has been found!", "Found rift: " ..foundEgg, 0x008000)
