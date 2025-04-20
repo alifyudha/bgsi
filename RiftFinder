@@ -106,7 +106,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
                 	OpenEgg(Rift.Name)
 				end
 				task.wait(.1)
-            until not workspace.RenderedRifts:FindFirstChild(Rift.Name)               
+            until not workspace.Rendered.Rifts:FindFirstChild(Rift.Name)               
 		end
 	end
 end
