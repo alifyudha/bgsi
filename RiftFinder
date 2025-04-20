@@ -65,7 +65,7 @@ function spoofEgg(rift)
 elseif rift == "void-egg" then
     return "Void Egg"
 elseif rift == "event-1" then
-    return "Rabbit Egg"
+    return "Bunny Egg"
 elseif rift == "event-2" then
     return "Pastel Egg"
 elseif rift == "man-egg" then
