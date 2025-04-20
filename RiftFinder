@@ -1,5 +1,3 @@
--- loadstring(game:HttpGet('https://raw.githubusercontent.com/bingusUTMA/bgsi/refs/heads/main/RiftFinder'))()
-
 local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
 Webhook_URL = 'https://discord.com/api/webhooks/1363088891145490594/SxMa-lHRfVMvPoxI82NfsdI0UiiNbR7IoWQNA4l0VRO5VqRtLCg5RjAbvXqC8PaGZjhp'
