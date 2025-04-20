@@ -101,7 +101,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 
             repeat
 				local part1 = Rift.EggPlatformSpawn.Part
-				local part2 = game.Players.Character.HumanoidRootPart
+				local part2 = game.Players.LocalPlayer.Character.HumanoidRootPart
 				if (part1.Position - part2.Position).Magnitude <= 10 then
                 	OpenEgg(Rift.Name)
 				end
