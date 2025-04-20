@@ -98,12 +98,8 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 			found = true
 
             repeat
-                local part1 = Rift.EggPlatformSpawn.Part
-                local part2 = game.Players.LocalPlayer.Character.HumanoidRootPart
-                if (part1.Position - part2.Position).Magnitude <= 10 then
-                    OpenEgg(Rift.Name)
-                end
-				task.wait(.1)
+                OpenEgg(Rift.Name)
+		task.wait(.1)
             until not workspace.Rendered.Rifts:FindFirstChild(Rift.Name)               
 		end
 	end
