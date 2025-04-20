@@ -121,7 +121,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 
             repeat
                 OpenEgg(Rift.Name)
-		if not workspace.Rendered.Rifts:FindFirstChild(Rift.Name) then RiftExists = false end
+		if not Rift then RiftExists = false end
 		task.wait(.05)
             until RiftExists == false	
 	    sendWebhookNotif("Rift Disappeared", "The found rift, " ..foundEgg.. ", has just disappeared. If you would like to server hop, press X on your keyboard while ingame.")
