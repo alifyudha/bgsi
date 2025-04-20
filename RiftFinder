@@ -98,7 +98,6 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 
 			found = true
 
-			RiftCounter += 1
 
             repeat
                 OpenEgg(Rift.Name)
