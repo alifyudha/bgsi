@@ -92,12 +92,14 @@ UIS.InputBegan:Connect(function(inp, proc)
 	if proc then return end
 
 	if inp.KeyCode == Enum.KeyCode.X then
-		repeat
-			local s,f = pcall(function()
-				teleport()
-				task.wait(2)
-			end)
-		until found == false
+		if found == true then
+			repeat
+				local s,f = pcall(function()
+					teleport()
+					task.wait(2)
+				end)
+			until found == false
+		end
 	end
 end)
 
