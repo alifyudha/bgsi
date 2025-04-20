@@ -52,8 +52,8 @@ function teleport()
     end
 end
 
-function sendWebhookNotif(rift)
-local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = rift.." has been detected!", ["type"] = "rich", ["color"] = tonumber(0xffffff) }} }) } )
+function sendWebhookNotif(title, description)
+local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = title, ["description"] = description, ["type"] = "rich", ["color"] = tonumber(0xffffff) }} }) } )
 end
 
 function spoofEgg(rift)
@@ -88,9 +88,9 @@ notify("Finding eggs...", " ")
 for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 	if table.find(eggs, Rift.Name) then   
 		if (Rift.Display.SurfaceGui.Icon.Luck.Text == "x25") or Rift.Name == "man-egg" then
-			notify("Egg Detected!", "Egg:" ..Rift.Name)
 			local foundEgg = spoofEgg(Rift.Name)
-			sendWebhookNotif(foundEgg)
+			notify("A rift has been found!", "Found rift:" ..foundEgg)
+			sendWebhookNotif("A rift has been found!", "Found rift: " ..foundEgg)
 
 			local Highlight = Instance.new("Highlight")
 			Highlight.FillTransparency = 1
@@ -98,10 +98,13 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 
 			found = true
 
+			RiftCounter += 1
+
             repeat
                 OpenEgg(Rift.Name)
-		task.wait(.05)
-            until not workspace.Rendered.Rifts:FindFirstChild(Rift.Name)               
+				task.wait(.1)
+            until not workspace.Rendered.Rifts:FindFirstChild(Rift.Name)
+			sendWebhookNotif("Rift Disappeared", "The found rift, " ..foundEgg.. ", has just disappeared.")
 		end
 	end
 end
