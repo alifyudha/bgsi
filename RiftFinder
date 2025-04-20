@@ -56,24 +56,23 @@ function sendWebhookNotif(rift)
 local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = rift.." has been detected!", ["type"] = "rich", ["color"] = tonumber(0xffffff) }} }) } )
 end
 
-function SpoofEgg(rift)
-    if rift.Name == "nightmare-egg" then
-        return "Nightmare Egg"
-    elseif rift.name == "easter-1" then
-        return "Rabbit Egg"
-    elseif rift.name == "easter-2" then
-        return "Pastel Egg"
-    elseif rift.name == "rainbow-egg" then
-        return "Rainbow Egg"
-    elseif rift.Name == "man-egg" then
-        return "Aura Egg"
-    elseif rift.name == "void-egg" then
-        return "Void Egg"
-    end
-end
-
 function OpenEgg(rift)
-local egg = SpoofEgg(rift)
+
+local egg
+
+if rift.Name == "nightmare-egg" then
+    egg = "Nightmare Egg"
+elseif rift.Name == "void-egg" then
+    egg = "Void Egg"
+elseif rift.Name == "event-1" then
+    egg = "Rabbit Egg"
+elseif rift.Name == "event-2" then
+    egg = "Pastel Egg"
+elseif rift.Name == "man-egg" then
+    egg = "Aura Egg"
+elseif rift.Name == "rainbow-egg" then
+    egg = "Rainbow Egg"
+end
 
 local args = {
     [1] = "HatchEgg",
@@ -97,14 +96,10 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 
 			found = true
 
-			firetouchinterest(workspace.Rendered.Generic.Zen.Display, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
-
             repeat
 				local part1 = Rift.EggPlatformSpawn.Part
 				local part2 = game.Players.LocalPlayer.Character.HumanoidRootPart
-				if (part1.Position - part2.Position).Magnitude <= 10 then
-                	OpenEgg(Rift.Name)
-				end
+                OpenEgg(Rift.Name)
 				task.wait(.1)
             until not workspace.Rendered.Rifts:FindFirstChild(Rift.Name)               
 		end
