@@ -89,7 +89,8 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 	if table.find(eggs, Rift.Name) then   
 		if (Rift.Display.SurfaceGui.Icon.Luck.Text == "x25") or Rift.Name == "man-egg" then
 			notify("Egg Detected!", "Egg:" ..Rift.Name)
-			sendWebhookNotif(Rift.Name)
+			local foundEgg = spoofEgg(Rift.Name)
+			sendWebhookNotif(foundEgg)
 
 			local Highlight = Instance.new("Highlight")
 			Highlight.FillTransparency = 1
@@ -99,7 +100,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 
             repeat
                 OpenEgg(Rift.Name)
-		task.wait(.1)
+		task.wait(.05)
             until not workspace.Rendered.Rifts:FindFirstChild(Rift.Name)               
 		end
 	end
