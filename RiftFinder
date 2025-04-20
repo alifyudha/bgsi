@@ -92,14 +92,12 @@ UIS.InputBegan:Connect(function(inp, proc)
 	if proc then return end
 
 	if inp.KeyCode == Enum.KeyCode.X then
-		if found == true then
-			repeat
-				local s,f = pcall(function()
-					teleport()
-					task.wait(2)
-				end)
-			until found == false
-		end
+		repeat
+			local s,f = pcall(function()
+				teleport()
+				task.wait(2)
+			end)
+		until found == false
 	end
 end)
 
@@ -122,8 +120,9 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 
             repeat
                 OpenEgg(Rift.Name)
+		if not workspace.Rendered.Rifts:FindFirstChild(Rift.Name) then found = false
 		task.wait(05)
-            until not workspace.Rendered.Rifts:FindFirstChild(Rift.Name)	
+            until found == false	
 	    sendWebhookNotif("Rift Disappeared", "The found rift, " ..foundEgg.. ", has just disappeared. If you would like to server hop, press X on your keyboard while ingame.")
 		end
 	end
