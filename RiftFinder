@@ -95,7 +95,7 @@ UIS.InputBegan:Connect(function(inp, proc)
 		repeat
 			local s,f = pcall(function()
 				teleport()
-				task.wait(2)
+				task.wait(4)
 			end)
 		until found == false
 	end
@@ -135,7 +135,7 @@ if not found then
 	repeat
 		local s,f = pcall(function()
 			teleport()
-			task.wait(2)
+			task.wait(4)
 		end)
 	until found == true
 end
