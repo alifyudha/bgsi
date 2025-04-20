@@ -125,7 +125,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 		task.wait(.05)
             until RiftExists == false
 	    print("Rift gone")
-	    sendWebhookNotif("Rift Disappeared", "The found rift, " ..foundEgg.. ", has just disappeared. If you would like to server hop, press X on your keyboard while ingame.", 0xff0000)
+	    sendWebhookNotif("Rift Ended", "The found rift, " ..foundEgg.. ", has just ended. If you would like to server hop, press X on your keyboard while ingame.", 0xff0000)
 		end
 	end
 end
