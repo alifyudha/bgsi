@@ -138,7 +138,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 			local recommendedIsland = SpoofIsland(riftHeight)
 			local Timer = Rift.Display.SurfaceGui.Timer.Text
 
-			notify("A rift has been found!", "Found rift: " ..foundRift.. " at " ..riftHeight.. " studs, which is under " ..recommendedIsland.. ".")
+			notify("A rift has been found!", "Found rift: " ..foundRift.. " with " ..Timer.. " left at " ..riftHeight.. " studs, which is under " ..recommendedIsland.. ".")
 			sendWebhookNotifRifts(foundRift, riftHeight, recommendedIsland, Timer)
 
 			local Highlight = Instance.new("Highlight")
