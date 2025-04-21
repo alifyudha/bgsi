@@ -96,8 +96,8 @@ function sendWebhookNotif(title, description, color)
 local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = title, ["description"] = description, ["type"] = "rich", ["color"] = tonumber(color) }} }) } )
 end
 
-function sendWebhookNotifRifts(foundRift, height, recommended)
-local response = request( { Url = Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "@here", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = "", ["type"] = "rich", ["color"] = tonumber(0x00f12d), ["fields"] = { { ["name"] = "Rift:", ["value"] = foundRift, ["inline"] = true }, { ["name"] = "Height:", ["value"] = height, ["inline"] = true}, { ["name"] = "Recommended teleport:", ["value"] = recommended, ["inline"] = true} } }} }) } )
+function sendWebhookNotifRifts(foundRift, height, recommended, timer)
+local response = request( { Url = Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "@here", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = "", ["type"] = "rich", ["color"] = tonumber(0x00f12d), ["fields"] = { { ["name"] = "Rift:", ["value"] = foundRift, ["inline"] = true }, { ["name"] = "Height:", ["value"] = height, ["inline"] = true}, { ["name"] = "Recommended teleport:", ["value"] = recommended, ["inline"] = true }, { ["name"] = "Timer:", ["value"] = timer, ["inline"] = true } } }} }) } )
 end
 
 function OpenEgg(rift)
@@ -136,9 +136,10 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 			local foundRift = spoofEgg(Rift.Name)
 			local riftHeight = math.floor(Rift:GetPivot().Position.Y) - 4
 			local recommendedIsland = SpoofIsland(riftHeight)
+			local Timer = Rift.Display.SurfaceGui.Timer.Text
 
 			notify("A rift has been found!", "Found rift: " ..foundRift.. " at " ..riftHeight.. " studs, which is under " ..recommendedIsland.. ".")
-			sendWebhookNotifRifts(foundRift, riftHeight, recommendedIsland)
+			sendWebhookNotifRifts(foundRift, riftHeight, recommendedIsland, Timer)
 
 			local Highlight = Instance.new("Highlight")
 			Highlight.FillTransparency = 1
