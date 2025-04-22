@@ -139,6 +139,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 			local Timer = Rift.Display.SurfaceGui.Timer.Text
 
 			if (Timer == "2 minutes") or (Timer == "1 minute") or (string.match(Timer, "seconds")) then continue end
+			if (Rift.Name == "event-1") and ((game.Players.LocalPlayer.PlayerGui.ScreenGui.VersionLabel.Text == "v9675") or (game.Players.LocalPlayer.PlayerGui.ScreenGui.VersionLabel.Text == "v9677")) then continue end
 
 			notify("A rift has been found!", "Found rift: " ..foundRift.. " with " ..Timer.. " left at " ..riftHeight.. " studs, which is under " ..recommendedIsland.. ".")
 			sendWebhookNotifRifts(foundRift, riftHeight, recommendedIsland, Timer)
