@@ -4,7 +4,7 @@ local UIS = game:GetService("UserInputService")
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
-task.wait(5)
+task.wait(2.5)
 
 if game.Players.LocalPlayer.PlayerGui.ScreenGui.Enabled == false then
 	game.Players.LocalPlayer.PlayerGui.Intro.Enabled = false
