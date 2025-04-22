@@ -62,7 +62,7 @@ function teleport()
     end
 end
 
-function SpoofIsland(height)
+function spoofIsland(height)
 if (height > 0 ) and (height < 410) then
 	return "Floating Island (Island 1)"
 elseif (height > 410) and (height < 2650) then
@@ -136,7 +136,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 
 			local foundRift = spoofEgg(Rift.Name)
 			local riftHeight = math.floor(Rift:GetPivot().Position.Y) - 4
-			local recommendedIsland = SpoofIsland(riftHeight)
+			local recommendedIsland = spoofIsland(riftHeight)
 			local Timer = Rift.Display.SurfaceGui.Timer.Text
 			local Version = game.Players.LocalPlayer.PlayerGui.ScreenGui.VersionLabel.Text
 
