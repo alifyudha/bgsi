@@ -96,8 +96,8 @@ function sendWebhookNotif(title, description, color)
 local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = title, ["description"] = description, ["type"] = "rich", ["color"] = tonumber(color) }} }) } )
 end
 
-function sendWebhookNotifRifts(foundRift, height, recommended, timer)
-local response = request( { Url = Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "@here", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = "", ["type"] = "rich", ["color"] = tonumber(0x00f12d), ["fields"] = { { ["name"] = "Rift:", ["value"] = foundRift, ["inline"] = true }, { ["name"] = "Height:", ["value"] = height, ["inline"] = true}, { ["name"] = "Recommended teleport:", ["value"] = recommended, ["inline"] = true }, { ["name"] = "Timer:", ["value"] = timer, ["inline"] = true } } }} }) } )
+function sendWebhookNotifRifts(foundRift, height, recommended, timer, version)
+local response = request( { Url = Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "@here", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = "", ["type"] = "rich", ["color"] = tonumber(0x00f12d), ["fields"] = { { ["name"] = "Rift:", ["value"] = foundRift, ["inline"] = true }, { ["name"] = "Height:", ["value"] = height, ["inline"] = true}, { ["name"] = "Recommended teleport:", ["value"] = recommended, ["inline"] = true }, { ["name"] = "Timer:", ["value"] = timer, ["inline"] = true }, {["name"] = "Version:", ["value"] = version, ["inline"] = true} } }} }) } )
 end
 
 function OpenEgg(rift)
@@ -133,16 +133,18 @@ notify("Finding rifts...", " ")
 for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 	if table.find(eggs, Rift.Name) then   
 		if (Rift.Display.SurfaceGui.Icon.Luck.Text == "x25") or (Rift.Name == "man-egg") then
+
 			local foundRift = spoofEgg(Rift.Name)
 			local riftHeight = math.floor(Rift:GetPivot().Position.Y) - 4
 			local recommendedIsland = SpoofIsland(riftHeight)
 			local Timer = Rift.Display.SurfaceGui.Timer.Text
+			local Version = game.Players.LocalPlayer.PlayerGui.ScreenGui.VersionLabel.Text
 
 			if (Timer == "2 minutes") or (Timer == "1 minute") or (string.match(Timer, "seconds")) then continue end
-			if (Rift.Name == "event-1") and ((game.Players.LocalPlayer.PlayerGui.ScreenGui.VersionLabel.Text == "v9675") or (game.Players.LocalPlayer.PlayerGui.ScreenGui.VersionLabel.Text == "v9677")) then continue end
+			if (Rift.Name == "event-1") and ((Version == "v9675") or (Version == "v9677")) then continue end
 
 			notify("A rift has been found!", "Found rift: " ..foundRift.. " with " ..Timer.. " left at " ..riftHeight.. " studs, which is under " ..recommendedIsland.. ".")
-			sendWebhookNotifRifts(foundRift, riftHeight, recommendedIsland, Timer)
+			sendWebhookNotifRifts(foundRift, riftHeight, recommendedIsland, Timer, Version)
 
 			local Highlight = Instance.new("Highlight")
 			Highlight.FillTransparency = 1
