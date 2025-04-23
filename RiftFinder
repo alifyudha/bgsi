@@ -172,11 +172,11 @@ end
 
 if not found then
 	notify("No rifts found", "Server hopping might take some time")
-	task.wait(5)
+	task.wait(10)
 	repeat
 		local s,f = pcall(function()
 			teleport()
-			task.wait(4)
+			task.wait(10)
 		end)
 	until found == true
 end
