@@ -4,7 +4,7 @@ local UIS = game:GetService("UserInputService")
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
-task.wait(2.5)
+task.wait(5)
 
 if game.Players.LocalPlayer.PlayerGui.ScreenGui.Enabled == false then
 	game.Players.LocalPlayer.PlayerGui.Intro.Enabled = false
@@ -29,7 +29,6 @@ end
 function teleport()
 	print("Teleport Attempt")
 	TeleportAttempts += 1
-	game.Players.LocalPlayer.Character.PrimaryPart:SetNetworkOwner(nil)
 
 	if TeleportAttempts == 20 then
 	sendWebhookNotif("Script Alert", "The script is unable to serverhop. Please check the console for possible errors.", 0xff0000)
@@ -166,7 +165,7 @@ end
 
 if not found then
 	notify("No rifts found", "Server hopping might take some time")
-	task.wait(5)
+	task.wait(2.5)
 	repeat
 		local s,f = pcall(function()
 			teleport()
