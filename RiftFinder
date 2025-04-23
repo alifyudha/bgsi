@@ -48,7 +48,7 @@ elseif height > 10130 then
 end
 
 function spoofEgg(rift)
-    if rift == "nightmare-egg" then
+if rift == "nightmare-egg" then
     return "Nightmare Egg"
 elseif rift == "void-egg" then
     return "Void Egg"
@@ -60,6 +60,8 @@ elseif rift == "man-egg" then
     return "Aura Egg"
 elseif rift == "rainbow-egg" then
     return "Rainbow Egg"
+elseif rift == "event-3" then
+    return "Throwback Egg"
 end
 end
 
