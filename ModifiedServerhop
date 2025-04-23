@@ -1,14 +1,6 @@
 local httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
 
 local function serverHop()
-    local function notify(title, message)
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = title,
-            Text = message,
-            Duration = 5
-        })
-    end
-    
     if httprequest then
         
         local HttpService = game:GetService("HttpService")
@@ -65,14 +57,8 @@ local function serverHop()
                 wait(2)
                 
                 TeleportService:TeleportToPlaceInstance(PlaceId, selectedServer.id, LocalPlayer)
-            else
-                notify("Serverhop", "Couldn't find a server")
             end
-        else
-            notify("Serverhop", "Failed to get server list")
         end
-    else
-        notify("Error", "Fail")
     end
 end
 
