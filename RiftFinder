@@ -16,6 +16,7 @@ end
 
 local found = false
 local TeleportAttempts = 0
+local TeleportAttemptLimit = 40
 
 --////////////////////////////////////////////////////////
 
@@ -30,7 +31,7 @@ function teleport()
 	print("Teleport Attempt")
 	TeleportAttempts += 1
 
-	if TeleportAttempts == 20 then
+	if TeleportAttempts == TeleportAttemptLimit then
 	sendWebhookNotif("Script Alert", "The script is unable to serverhop. Please check the console for possible errors.", 0xff0000)
 	end
 
