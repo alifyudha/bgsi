@@ -62,6 +62,13 @@ function teleport()
     end
 end
 
+TeleportService.TeleportInitFailed:Connect(function(player, tpResult, errorMsg)
+	if string.match(errorMsg, "IsTeleporting") then
+		print(tpResult)
+		TeleportService:Teleport(game.PlaceId)
+	end
+end)
+
 function spoofIsland(height)
 if (height > 0 ) and (height < 410) then
 	return "Floating Island (Island 1)"
