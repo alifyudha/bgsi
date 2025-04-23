@@ -89,7 +89,7 @@ UIS.InputBegan:Connect(function(inp, proc)
 
 	if inp.KeyCode == Enum.KeyCode.X then
 		local s,f = pcall(function()
-			teleport()
+			repeat teleport() task.wait(5) until false
 		end)
 	end
 end)
@@ -134,5 +134,5 @@ end
 if not found then
 	notify("No rifts found", "Server hopping might take some time")
 	task.wait(2)
-	teleport()
+	repeat teleport() task.wait(5) until false
 end
