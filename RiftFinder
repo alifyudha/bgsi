@@ -4,7 +4,7 @@ local UIS = game:GetService("UserInputService")
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
-task.wait(5)
+task.wait(3)
 
 if game.Players.LocalPlayer.PlayerGui.ScreenGui.Enabled == false then
 	game.Players.LocalPlayer.PlayerGui.Intro.Enabled = false
@@ -30,31 +30,7 @@ end
 
 function teleport()
 	print("Teleport Attempt")
-	TeleportAttempts += 1
-
-	if TeleportAttempts == TeleportAttemptLimit then
-	sendWebhookNotif("Script Alert", "The script is unable to serverhop. Please check the console for possible errors.", 0xff0000)
-	end
-
-	httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
-
-	if httprequest then
-        local servers = {}
-        local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", game.PlaceId)})
-        local body = HttpService:JSONDecode(req.Body)
-
-        if body and body.data then
-            for i, v in next, body.data do
-                if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= JobId then
-                    table.insert(servers, 1, v.id)
-                end
-            end
-        end
-
-        if #servers > 0 then
-            TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)], game.Players.LocalPlayer)
-        end
-    end
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/bingusUTMA/bgsi/refs/heads/main/ModifiedServerhop"))()
 end
 
 function spoofIsland(height)
@@ -112,12 +88,9 @@ UIS.InputBegan:Connect(function(inp, proc)
 	if proc then return end
 
 	if inp.KeyCode == Enum.KeyCode.X then
-		repeat
-			local s,f = pcall(function()
-				teleport()
-				task.wait(4)
-			end)
-		until found == false
+		local s,f = pcall(function()
+			teleport()
+		end)
 	end
 end)
 
@@ -160,11 +133,6 @@ end
 
 if not found then
 	notify("No rifts found", "Server hopping might take some time")
-	task.wait(1)
-	repeat
-		local s,f = pcall(function()
-			teleport()
-			task.wait(4)
-		end)
-	until found == true
+	task.wait(2)
+	teleport()
 end
