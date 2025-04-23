@@ -4,7 +4,7 @@ local UIS = game:GetService("UserInputService")
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
-task.wait(2.5)
+task.wait(5)
 
 if game.Players.LocalPlayer.PlayerGui.ScreenGui.Enabled == false then
 	game.Players.LocalPlayer.PlayerGui.Intro.Enabled = false
@@ -158,7 +158,7 @@ end
 
 if not found then
 	notify("No rifts found", "Server hopping might take some time")
-	task.wait(2.5)
+	task.wait(1)
 	repeat
 		local s,f = pcall(function()
 			teleport()
