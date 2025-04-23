@@ -30,6 +30,7 @@ end
 function teleport()
 	print("Teleport Attempt")
 	TeleportAttempts += 1
+	local Sort = "Asc"
 
 	if TeleportAttempts == TeleportAttemptLimit then
 	sendWebhookNotif("Script Alert", "The script is unable to serverhop. Please check the console for possible errors.", 0xff0000)
@@ -39,7 +40,7 @@ function teleport()
 
 	if httprequest then
         local servers = {}
-        local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", game.PlaceId)})
+        local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=" ..Sort.. "&limit=100&excludeFullGames=true", game.PlaceId)})
         local body = HttpService:JSONDecode(req.Body)
 
         if body and body.data then
