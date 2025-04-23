@@ -176,7 +176,7 @@ if not found then
 	repeat
 		local s,f = pcall(function()
 			teleport()
-			task.wait(10)
+			task.wait(5)
 		end)
 	until found == true
 end
