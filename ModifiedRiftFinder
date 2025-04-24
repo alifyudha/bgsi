@@ -1,0 +1,151 @@
+local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
+local UIS = game:GetService("UserInputService")
+
+Webhook_URL = 'https://discord.com/api/webhooks/1363964718502379540/P4VhC17t5CEIZWyU7cT25yad0njpyBYxsJFZsq_Qof8wV9u3KDqJc_uQviivi0PJ2VIx'
+eggs = {
+    "nightmare-egg",
+    "event-1",
+    "event-2",
+    "event-3",
+    "man-egg"
+}
+
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/bingusUTMA/bgsi/refs/heads/main/RiftFinder'))()")
+
+task.wait(3)
+
+if game.Players.LocalPlayer.PlayerGui.ScreenGui.Enabled == false then
+	game.Players.LocalPlayer.PlayerGui.Intro.Enabled = false
+	game.Players.LocalPlayer.PlayerGui.LoadingGui.Enabled = false
+	game.Players.LocalPlayer.PlayerGui.ScreenGui.Enabled = true
+	game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
+	game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, true)
+end
+
+local found = false
+
+local TeleportAttempts = 0
+local TeleportAttemptLimit = 40
+
+--////////////////////////////////////////////////////////
+
+function notify(title,text)
+	game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = title, -- Required
+	Text = text -- Required
+})
+end
+
+function teleport()
+	print("Teleport Attempt")
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/bingusUTMA/bgsi/refs/heads/main/ModifiedServerhop"))()
+end
+
+function spoofIsland(height)
+if (height > 0 ) and (height < 410) then
+	return "Floating Island (Island 1)"
+elseif (height > 410) and (height < 2650) then
+	return "Outer Space (Island 2)"
+elseif (height > 2650) and (height < 6850) then
+	return "Twilight (Island 3)"
+elseif (height > 6850) and (height < 10130) then
+	return "The Void (Island 4)"
+elseif height > 10130 then
+	return "Zen (Island 5)"
+    end
+end
+
+function spoofEgg(rift)
+if rift == "nightmare-egg" then
+    return "Nightmare Egg"
+elseif rift == "void-egg" then
+    return "Void Egg"
+elseif rift == "event-1" then
+    return "Bunny Egg"
+elseif rift == "event-2" then
+    return "Pastel Egg"
+elseif rift == "man-egg" then
+    return "Aura Egg"
+elseif rift == "rainbow-egg" then
+    return "Rainbow Egg"
+elseif rift == "event-3" then
+    return "Throwback Egg"
+end
+end
+
+function sendWebhookNotif(title, description, color)
+local response = request( { Url =  Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "", ["embeds"] = {{ ["title"] = title, ["description"] = description, ["type"] = "rich", ["color"] = tonumber(color) }} }) } )
+end
+
+function sendWebhookNotifRifts(foundRift, height, recommended, timer, version)
+local response = request( { Url = Webhook_URL, Method = 'POST', Headers = { ['Content-Type'] = 'application/json' }, Body = HttpService:JSONEncode({ ["content"] = "@here", ["embeds"] = {{ ["title"] = "A rift has been found!", ["description"] = "", ["type"] = "rich", ["color"] = tonumber(0x00f12d), ["fields"] = { { ["name"] = "Rift:", ["value"] = foundRift, ["inline"] = true }, { ["name"] = "Height:", ["value"] = height, ["inline"] = true}, { ["name"] = "Recommended teleport:", ["value"] = recommended, ["inline"] = true }, { ["name"] = "Timer:", ["value"] = timer, ["inline"] = true }, {["name"] = "Version:", ["value"] = version, ["inline"] = true} } }} }) } )
+end
+
+function OpenEgg(rift)
+local egg = spoofEgg(rift)
+
+local args = {
+    [1] = "HatchEgg",
+    [2] = egg,
+    [3] = 6
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Shared"):WaitForChild("Framework"):WaitForChild("Network"):WaitForChild("Remote"):WaitForChild("Event"):FireServer(unpack(args))
+end
+
+--////////////////////////////////////////////////////////
+
+UIS.InputBegan:Connect(function(inp, proc)
+	if proc then return end
+
+	if inp.KeyCode == Enum.KeyCode.X then
+		local s,f = pcall(function()
+			repeat teleport() task.wait(5) until false
+		end)
+	end
+end)
+
+--////////////////////////////////////////////////////////
+
+notify("Finding rifts...", " ")
+
+for i,Rift in workspace.Rendered.Rifts:GetChildren() do
+	if table.find(eggs, Rift.Name) then   
+		if (Rift.Display.SurfaceGui.Icon.Luck.Text == "x25") or (Rift.Name == "man-egg") then
+
+			local foundRift = spoofEgg(Rift.Name)
+			local riftHeight = math.floor(Rift:GetPivot().Position.Y) - 4
+			local recommendedIsland = spoofIsland(riftHeight)
+			local Timer = Rift.Display.SurfaceGui.Timer.Text
+			local Version = game.Players.LocalPlayer.PlayerGui.ScreenGui.VersionLabel.Text
+
+			if (Timer == "2 minutes") or (Timer == "1 minute") or (string.match(Timer, "seconds")) then continue end
+			if (Rift.Name == "event-1") and ((Version == "v9675") or (Version == "v9677")) then continue end
+
+			notify("A rift has been found!", "Found rift: " ..foundRift.. " with " ..Timer.. " left at " ..riftHeight.. " studs, which is under " ..recommendedIsland.. ".")
+			sendWebhookNotifRifts(foundRift, riftHeight, recommendedIsland, Timer, Version)
+
+			local Highlight = Instance.new("Highlight")
+			Highlight.FillTransparency = 1
+			Highlight.Parent = Rift
+
+			found = true
+			local RiftExists = true
+
+            repeat
+                OpenEgg(Rift.Name)
+		if Rift.Display.SurfaceGui.Timer.Text == "0 seconds" then RiftExists = false end
+		task.wait(.05)
+            until RiftExists == false
+	    sendWebhookNotif("Rift Ended", "The found rift, " ..foundRift.. ", has just ended.", 0xff0000)
+		end
+	end
+end
+
+if not found then
+	notify("No rifts found", "Server hopping might take some time")
+	task.wait(2)
+	repeat teleport() task.wait(5) until false
+end
