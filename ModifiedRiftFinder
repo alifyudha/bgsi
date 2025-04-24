@@ -11,7 +11,7 @@ eggs = {
     "man-egg"
 }
 
-if not game:IsLoaded() then game.Loaded:Wait() end
+task.wait(3)
 
 queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/bingusUTMA/bgsi/refs/heads/main/ModifiedRiftFinder'))()")
 
