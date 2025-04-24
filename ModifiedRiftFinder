@@ -132,15 +132,16 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 			found = true
 			local RiftExists = true
 			UIS.InputBegan:Connect(function(inp, proc)
-			if proc then return end
+				if proc then return end
 
-			if inp.KeyCode == Enum.KeyCode.Z then
-			    repeat
-		                OpenEgg(Rift.Name)
-				if Rift.Display.SurfaceGui.Timer.Text == "0 seconds" then RiftExists = false end
-				task.wait(.05)
-		            until RiftExists == false
-			    sendWebhookNotif("Rift Ended", "The found rift, " ..foundRift.. ", has just ended.", 0xff0000)
+				if inp.KeyCode == Enum.KeyCode.Z then
+					repeat
+					OpenEgg(Rift.Name)
+					if Rift.Display.SurfaceGui.Timer.Text == "0 seconds" then RiftExists = false end
+					task.wait(.05)
+						until RiftExists == false
+					sendWebhookNotif("Rift Ended", "The found rift, " ..foundRift.. ", has just ended.", 0xff0000)
+				end
 			end)
 		end
 	end
