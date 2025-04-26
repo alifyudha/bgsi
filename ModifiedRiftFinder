@@ -4,7 +4,6 @@ local UIS = game:GetService("UserInputService")
 
 Webhook_URL = 'https://discord.com/api/webhooks/1363964718502379540/P4VhC17t5CEIZWyU7cT25yad0njpyBYxsJFZsq_Qof8wV9u3KDqJc_uQviivi0PJ2VIx'
 eggs = {
-    "nightmare-egg",
     "event-1",
     "event-2",
     "event-3",
@@ -119,7 +118,7 @@ for i,Rift in workspace.Rendered.Rifts:GetChildren() do
 			local Timer = Rift.Display.SurfaceGui.Timer.Text
 			local Version = game.Players.LocalPlayer.PlayerGui.ScreenGui.VersionLabel.Text
 
-			if (Timer == "2 minutes") or (Timer == "1 minute") or (string.match(Timer, "seconds")) then continue end
+			if (Timer == "2 minutes") or (Timer == "1 minute") or (Timer == "3 minutes") or (string.match(Timer, "seconds")) then continue end
 			if (Rift.Name == "event-1") and ((Version == "v9675") or (Version == "v9677")) then continue end
 
 			notify("A rift has been found!", "Found rift: " ..foundRift.. " with " ..Timer.. " left at " ..riftHeight.. " studs, which is under " ..recommendedIsland.. ".")
