@@ -2,7 +2,7 @@ local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
 local UIS = game:GetService("UserInputService")
 
-Webhook_URL = 'https://discord.com/api/webhooks/1363964718502379540/P4VhC17t5CEIZWyU7cT25yad0njpyBYxsJFZsq_Qof8wV9u3KDqJc_uQviivi0PJ2VIx'
+Webhook_URL = 'https://discord.com/api/webhooks/1365694413375934605/MlxCb-Fgx1alg7EfKw9sqAo7QxyA174F-2GTKrUsZYwfapc04v5cjFl3gzUrYWotiNfw'
 eggs = {
     "event-1",
     "event-2",
