@@ -12,7 +12,7 @@ eggs = {
 
 task.wait(2)
 
-queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/bingusUTMA/bgsi/refs/heads/main/ModifiedRiftFinder'))()")
+queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/alifyudha/bgsi/refs/heads/main/ModifiedRiftFinder'))()")
 
 if game.Players.LocalPlayer.PlayerGui:WaitForChild("ScreenGui").Enabled == false then
 	game.Players.LocalPlayer.PlayerGui.Intro.Enabled = false
